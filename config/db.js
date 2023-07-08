@@ -1,12 +1,11 @@
-const mongoose=require('mongoose')
-const connecTodb=async () =>{
-    mongoose.connect(process.env.MONGO_URL)
-    .then((conn) => {
-       console.log(`Connected to DB : ${conn.Connection.host}`) 
-    }).catch((err) => {
-        console.log(err.message)
-        process.exit(1)
-    });
+// database connection
+const mongoose = require('mongoose')
+const MONGO_URL = process.env.MONGO_URL || "mongodb://localhost:27017/my_database";
+const connecTodb = () =>{
+    mongoose
+     .connect(MONGO_URL)
+     .then((conn)=>console.log(`Connected to ${conn.connection.host}`))
+     .catch((e) => console.log(e.message))
 }
-module.exports=connecTodb
+module.exports=connecTodb;
 

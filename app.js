@@ -1,16 +1,18 @@
 
 const express = require('express') 
-const app = express()
-const cors=require('cors')
-const connecTodb=require('./config/db')
-connecTodb()
-app.use(express.json())
-
-app.use(cors())
 const userRoutes= require('./routes/userRoutes')
-
-
-
+const connecTodb=require('./config/db')
+const cors=require('cors')
+const app = express()
+//connecting to database
+connecTodb()
+app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({extended:true}))
-app.use('/',userRoutes)
+app.use('/api/auth',userRoutes)
+app.use('/',(req,res)=>{
+    res.status(200).json({
+        data:"Register and Login"
+    })
+})
 module.exports=app

@@ -1,6 +1,8 @@
 const express = require('express')
-const {home,registerUser,loginUser }= require('../controllers/userController')
+const {registerUser,loginUser }= require('../controllers/userController')
+const validateRegistration= require('../middleware/validateRegistration')
+const validateLogin = require('../middleware/validateLogin')
 const router=express.Router()
-router.get('/',home)
-router.post('/register',registerUser)
-module.exports=router
+router.post('/register',validateRegistration,registerUser)
+router.post('/login', validateLogin,loginUser)
+module.exports=router;

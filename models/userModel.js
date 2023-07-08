@@ -1,4 +1,5 @@
 const mongoose=require('mongoose')
+// database model
 const userSchema = new mongoose.Schema({
     name:{
         type: String,
@@ -9,7 +10,7 @@ const userSchema = new mongoose.Schema({
     email : {
         type: String,
         trim: true,
-        unique: true,
+        unique: [true,"email must be unique"],
         required: [true,'Email address is required']
     },
    password: { 
